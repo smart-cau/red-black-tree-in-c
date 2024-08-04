@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 typedef enum { RBTREE_RED, RBTREE_BLACK } color_t;
+typedef enum { FIND_MIN, FIND_MAX } find_t;
 
 typedef int key_t;
 
