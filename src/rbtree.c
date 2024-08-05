@@ -333,5 +333,10 @@ int rbtree_erase(rbtree *tree, node_t *deleted) {
 
 int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n) {
   // TODO: implement to_array
+  for (int i = 0; i < n; i++) {
+    node_t* min = rbtree_min(t);
+    *(arr + i) = min->key;
+    rbtree_erase(t, min);
+  }
   return 0;
 }
