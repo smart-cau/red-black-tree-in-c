@@ -2,12 +2,12 @@
 
 #include <stdlib.h>
 
-node_t sentinel = {
+node_t SENTINEL = {
   .color = RBTREE_BLACK,
   .key = 0,
-  .parent = &sentinel,
-  .left = &sentinel,
-  .right = &sentinel
+  .parent = &SENTINEL,
+  .left = &SENTINEL,
+  .right = &SENTINEL
 };
 
 void left_rotate(rbtree* tree, node_t* pivot_node) {
@@ -47,7 +47,7 @@ rbtree *new_rbtree(void) {
   if (p == NULL)
     return NULL;
 
-  p->nil = &sentinel;
+  p->nil = &SENTINEL;
   p->root = p->nil;
 
   return p;
@@ -64,21 +64,16 @@ void delete_rbtree_helper(rbtree *t, node_t* node) {
 
 void delete_rbtree(rbtree *t) {
   node_t* root = t->root;
-  if (root != t->nil)
-    delete_rbtree_helper(t, root);
+  delete_rbtree_helper(t, root);
   free(t);
 }
 
 int is_left_child_of_p(node_t* child, node_t* parent) {
-  if (child == parent->left)
-    return 1;
-  return 0;
+  return child == parent->left;
 }
 
 int is_right_child_of_p(node_t* child, node_t* parent) {
-  if (child == parent->right)
-    return 1;
-  return 0;
+  return child == parent->right;
 }
 
 void rbtree_insert_fixup(rbtree *t, node_t* check_n) {
